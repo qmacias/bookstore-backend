@@ -6,7 +6,7 @@ from api.authors.domain.AuthorRepository import AuthorRepository
 from api.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
 
-class AuthorWiringModule(Module):
+class AuthorContextModule(Module):
 
     @singleton
     @provider
@@ -33,4 +33,4 @@ class AuthorWiringModule(Module):
         return AuthorCreator(repository, logger)
 
 
-container = Injector([AuthorWiringModule], auto_bind=True)
+container = Injector([AuthorContextModule], auto_bind=True)

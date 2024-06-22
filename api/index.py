@@ -5,7 +5,7 @@ from flask import Flask, request, make_response, Response
 from api.authors.application.AuthorCreator import AuthorCreator
 from api.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.authors.domain.InvalidAuthorName import InvalidAuthorName
-from api.authors.infrastructure.AuthorWiringModule import container
+from api.authors.infrastructure.AuthorContextModule import container
 
 app = Flask(__name__)
 

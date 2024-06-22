@@ -17,7 +17,7 @@ class AuthorName(object):
             self.__is_matching()
         except AssertionError:
             raise AuthorNameDoesNotMatch(
-                "No matches for '{0}'".format(self._value)
+                "no matches for '{0}'".format(self._value)
             )
 
     def __is_matching(self) -> None:

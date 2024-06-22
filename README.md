@@ -22,3 +22,13 @@ Create an author
 ```bash
 echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
+
+(*) Create an author (invalid id)
+```bash
+echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d.
+```
+
+(*) Create an author (invalid name)
+```bash
+echo '{"name": "john_doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
+```

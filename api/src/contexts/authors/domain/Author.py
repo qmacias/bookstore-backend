@@ -1,5 +1,4 @@
 class Author:
-
     @staticmethod
     def create(id: str, name: str) -> 'Author':
         author = Author(id, name)

@@ -6,7 +6,6 @@ from api.src.contexts.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadl
 
 @final
 class AuthorId(object):
-
     def __init__(self, value: str) -> None:
         self._value = value
         self.__ensure_valid_id()

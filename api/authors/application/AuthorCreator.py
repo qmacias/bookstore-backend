@@ -1,4 +1,4 @@
-import logging
+from logging import Logger
 
 from api.authors.domain.Author import Author
 from api.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
@@ -10,8 +10,9 @@ from api.authors.domain.InvalidAuthorName import InvalidAuthorName
 
 class AuthorCreator:
 
-    def __init__(self, repository: AuthorRepository) -> None:
+    def __init__(self, repository: AuthorRepository, logger: Logger) -> None:
         self.__repository = repository
+        self.__logger = logger
 
     def create(self, id: str, name: str) -> None:
         try:
@@ -19,8 +20,8 @@ class AuthorCreator:
 
             self.__repository.save(author)
         except AuthorIdIsBadlyFormed as e:
-            logging.error(e)
+            self.__logger.error(e)
             raise InvalidAuthorId(id)
         except AuthorNameDoesNotMatch as e:
-            logging.error(e)
+            self.__logger.error(e)
             raise InvalidAuthorName(name)

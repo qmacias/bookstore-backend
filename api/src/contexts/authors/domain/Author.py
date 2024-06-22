@@ -9,7 +9,9 @@ class Author:
 
     @staticmethod
     def create(id: str, name: str) -> 'Author':
-        return Author(AuthorId(id), AuthorName(name))
+        author = Author(AuthorId(id), AuthorName(name))
+
+        return author
 
     @property
     def id(self) -> str:

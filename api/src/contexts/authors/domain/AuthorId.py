@@ -23,8 +23,10 @@ class AuthorId(object):
     def __hash__(self) -> int:
         return hash(self._value)
 
-    def __eq__(self, other: 'AuthorId') -> bool:
-        return self._value == other.value
+    def __eq__(self, other) -> bool:
+        if isinstance(other, AuthorId):
+            return self._value == other.value
+        return False
 
     def __repr__(self) -> str:
-        return '<AuthorId: value={0}>'.format(self.value)
+        return f"<AuthorId: '{self.value}'>"

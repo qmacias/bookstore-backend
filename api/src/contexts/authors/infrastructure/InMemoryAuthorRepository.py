@@ -1,8 +1,8 @@
 from copy import deepcopy
 
-from api.src.contexts.authors.infrastructure.AuthorCollection import AuthorCollection
-from api.src.contexts.authors.domain.AuthorRepository import AuthorRepository
 from api.src.contexts.authors.domain.Author import Author
+from api.src.contexts.authors.domain.AuthorRepository import AuthorRepository
+from api.src.contexts.authors.infrastructure.AuthorCollection import AuthorCollection
 
 
 class InMemoryAuthorRepository(AuthorRepository):

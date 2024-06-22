@@ -1,0 +1,4 @@
+flask
+httpie
+injector
+python-dotenv

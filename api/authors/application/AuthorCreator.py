@@ -1,8 +1,8 @@
 from logging import Logger
 
 from api.authors.domain.Author import Author
-from api.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
-from api.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
+from api.authors.domain.AuthorIdFormatException import AuthorIdFormatException
+from api.authors.domain.AuthorNameMatchException import AuthorNameMatchException
 from api.authors.domain.AuthorRepository import AuthorRepository
 from api.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.authors.domain.InvalidAuthorName import InvalidAuthorName
@@ -19,9 +19,9 @@ class AuthorCreator:
             author = Author.create(id, name)
 
             self.__repository.save(author)
-        except AuthorIdIsBadlyFormed as e:
+        except AuthorIdFormatException as e:
             self.__logger.error(e)
             raise InvalidAuthorId(id)
-        except AuthorNameDoesNotMatch as e:
+        except AuthorNameMatchException as e:
             self.__logger.error(e)
             raise InvalidAuthorName(name)

@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import final
 
-from api.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
+from api.authors.domain.AuthorIdFormatException import AuthorIdFormatException
 
 
 @final
@@ -14,7 +14,7 @@ class AuthorId(object):
         try:
             UUID(self._value, version=4)
         except ValueError as e:
-            raise AuthorIdIsBadlyFormed(str(e)) from e
+            raise AuthorIdFormatException(str(e)) from e
 
     @property
     def value(self) -> str:

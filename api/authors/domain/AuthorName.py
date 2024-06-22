@@ -1,7 +1,7 @@
 from re import match
 from typing import final
 
-from api.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
+from api.authors.domain.AuthorNameMatchException import AuthorNameMatchException
 
 
 @final
@@ -16,7 +16,7 @@ class AuthorName(object):
         try:
             self.__is_matching()
         except AssertionError:
-            raise AuthorNameDoesNotMatch(
+            raise AuthorNameMatchException(
                 "no matches for '{0}'".format(self._value)
             )
 

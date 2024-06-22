@@ -9,9 +9,7 @@ class Author:
 
     @staticmethod
     def create(id: str, name: str) -> 'Author':
-        author = Author(AuthorId(id), AuthorName(name))
-
-        return author
+        return Author(AuthorId(id), AuthorName(name))
 
     @property
     def id(self) -> str:
@@ -21,8 +19,7 @@ class Author:
     def name(self) -> str:
         return self._name.value
 
-    @name.setter
-    def name(self, value: str) -> None:
+    def change_name(self, value: str) -> None:
         self._name = AuthorName(value)
 
     def __hash__(self) -> int:

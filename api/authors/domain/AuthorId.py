@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import final
 
-from api.src.contexts.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
+from api.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
 
 
 @final

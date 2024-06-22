@@ -1,11 +1,11 @@
 import logging
 
-from api.src.contexts.authors.domain.Author import Author
-from api.src.contexts.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
-from api.src.contexts.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
-from api.src.contexts.authors.domain.AuthorRepository import AuthorRepository
-from api.src.contexts.authors.domain.InvalidAuthorId import InvalidAuthorId
-from api.src.contexts.authors.domain.InvalidAuthorName import InvalidAuthorName
+from api.authors.domain.Author import Author
+from api.authors.domain.AuthorIdIsBadlyFormed import AuthorIdIsBadlyFormed
+from api.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
+from api.authors.domain.AuthorRepository import AuthorRepository
+from api.authors.domain.InvalidAuthorId import InvalidAuthorId
+from api.authors.domain.InvalidAuthorName import InvalidAuthorName
 
 
 class AuthorCreator:

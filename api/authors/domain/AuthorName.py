@@ -1,7 +1,7 @@
 from re import match
 from typing import final
 
-from api.src.contexts.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
+from api.authors.domain.AuthorNameDoesNotMatch import AuthorNameDoesNotMatch
 
 
 @final

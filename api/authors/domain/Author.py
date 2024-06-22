@@ -1,5 +1,5 @@
-from api.src.contexts.authors.domain.AuthorId import AuthorId
-from api.src.contexts.authors.domain.AuthorName import AuthorName
+from api.authors.domain.AuthorId import AuthorId
+from api.authors.domain.AuthorName import AuthorName
 
 
 class Author:

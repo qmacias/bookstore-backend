@@ -1,10 +1,10 @@
 from copy import deepcopy
 from logging import Logger
 
-from api.authors.domain.Author import Author
-from api.authors.domain.AuthorRepository import AuthorRepository
+from api.contexts.bookstore.authors.domain.Author import Author
+from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
-from api.authors.infrastructure.AuthorCollection import AuthorCollection
+from api.contexts.bookstore.authors.infrastructure.AuthorCollection import AuthorCollection
 
 
 class InMemoryAuthorRepository(AuthorRepository):

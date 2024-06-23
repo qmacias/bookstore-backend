@@ -1,6 +1,6 @@
 from typing import TypedDict, Dict
 
-from api.authors.domain.Author import Author
+from api.contexts.bookstore.authors.domain.Author import Author
 
 
 class AuthorDetails(TypedDict):

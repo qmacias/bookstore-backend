@@ -1,7 +1,7 @@
 from re import match
 from typing import final
 
-from api.authors.domain.AuthorNameMatchException import AuthorNameMatchException
+from api.contexts.bookstore.authors.domain.AuthorNameMatchException import AuthorNameMatchException
 
 
 @final

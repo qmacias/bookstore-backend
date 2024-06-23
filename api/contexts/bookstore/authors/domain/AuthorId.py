@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import final
 
-from api.authors.domain.AuthorIdFormatException import AuthorIdFormatException
+from api.contexts.bookstore.authors.domain.AuthorIdFormatException import AuthorIdFormatException
 
 
 @final

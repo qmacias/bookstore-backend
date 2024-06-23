@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from api.authors.domain.Author import Author
+from api.contexts.bookstore.authors.domain.Author import Author
 
 
 class AuthorRepository(ABC):

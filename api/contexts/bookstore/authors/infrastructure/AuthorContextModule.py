@@ -1,9 +1,9 @@
 from injector import Module, singleton, provider, Injector
 from logging import Logger, getLogger, DEBUG, Formatter, StreamHandler
 
-from api.authors.application.AuthorCreator import AuthorCreator
-from api.authors.domain.AuthorRepository import AuthorRepository
-from api.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
+from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
+from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from api.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
 
 class AuthorContextModule(Module):

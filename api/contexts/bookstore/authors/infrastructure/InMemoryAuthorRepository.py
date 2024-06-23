@@ -5,7 +5,7 @@ from logging import Logger
 from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from api.contexts.bookstore.authors.infrastructure.AuthorLookUpFailed import AuthorLookUpFailed
+from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
 
 
 class InMemoryAuthorRepository(AuthorRepository):

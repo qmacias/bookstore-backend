@@ -11,7 +11,6 @@ from api.contexts.bookstore.authors.domain.AuthorNameInvalidPattern import Autho
 
 
 class AuthorCreator:
-
     def __init__(self, repository: AuthorRepository, logger: Logger) -> None:
         self.__repository = repository
         self.__logger = logger

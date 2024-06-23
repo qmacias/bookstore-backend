@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response, Response
 
-from api.apps.bookstore.authors.routes.author_put_routes import author_put_routes
+from api.apps.bookstore.routes.authors.author_put_routes import author_put_routes
 
 app = Flask(__name__)
 

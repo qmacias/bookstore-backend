@@ -5,8 +5,8 @@ from flask import Blueprint, request, Response
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.contexts.bookstore.authors.domain.InvalidAuthorName import InvalidAuthorName
 
+from api.apps.bookstore.deps.BookstoreModule import container
 from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
-from api.contexts.bookstore.authors.infrastructure.AuthorContextModule import container
 
 author_put_routes = Blueprint('author_put_routes', __name__)
 

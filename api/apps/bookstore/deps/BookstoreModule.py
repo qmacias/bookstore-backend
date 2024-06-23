@@ -6,7 +6,7 @@ from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorReposit
 from api.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
 
-class AuthorContextModule(Module):
+class BookstoreModule(Module):
 
     @singleton
     @provider
@@ -33,4 +33,4 @@ class AuthorContextModule(Module):
         return AuthorCreator(repository, logger)
 
 
-container = Injector([AuthorContextModule], auto_bind=True)
+container = Injector([BookstoreModule], auto_bind=True)

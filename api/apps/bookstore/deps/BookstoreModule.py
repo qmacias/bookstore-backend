@@ -2,6 +2,8 @@ from injector import Module, singleton, provider, Injector
 from logging import Logger, getLogger, DEBUG, Formatter, StreamHandler
 
 from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
+from api.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
+
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from api.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
@@ -31,6 +33,10 @@ class BookstoreModule(Module):
     @provider
     def author_creator(self, repository: AuthorRepository, logger: Logger) -> AuthorCreator:
         return AuthorCreator(repository, logger)
+
+    @provider
+    def author_searcher(self, repository: AuthorRepository, logger: Logger) -> AuthorSearcher:
+        return AuthorSearcher(repository, logger)
 
 
 container = Injector([BookstoreModule], auto_bind=True)

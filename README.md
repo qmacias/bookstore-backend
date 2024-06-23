@@ -10,12 +10,13 @@ Here the client interacts with the provided Flask API endpoints.
 |--------|-------------------------------------------|------------------|
 | GET    | http://127.0.0.1:5000/health_check        | Health check     |
 | PUT    | http://127.0.0.1:5000/authors/{author_id} | Create an author |
+| GET    | http://127.0.0.1:5000/authors/{author_id} | Search an author |
 
 ---
 
 Health check
 ```bash
-http http://127.0.0.1:5000/health_check
+http GET http://127.0.0.1:5000/health_check
 ```
 
 Create an author
@@ -42,4 +43,9 @@ echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-46
 ERROR:AuthorNameMatchException: no pattern for 'john_doe'
 ```bash
 echo '{"name": "john_doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
+```
+
+Search an author
+```bash
+http GET http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```

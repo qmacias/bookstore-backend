@@ -14,14 +14,9 @@ class AuthorName(object):
 
     def __ensure_valid_name(self) -> None:
         try:
-            self.__is_matching()
+            assert match(self._REGEX, self._value) is not None
         except AssertionError:
-            raise AuthorNameInvalidPattern(
-                "no pattern matches for '{0}'".format(self._value)
-            )
-
-    def __is_matching(self) -> None:
-        assert match(self._REGEX, self._value) is not None
+            raise AuthorNameInvalidPattern(f"no pattern for '{self._value}'")
 
     @property
     def value(self) -> str:

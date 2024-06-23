@@ -1,7 +1,7 @@
 from re import match
 from typing import final
 
-from api.contexts.bookstore.authors.domain.AuthorNameMatchException import AuthorNameMatchException
+from api.contexts.bookstore.authors.domain.AuthorNameInvalidPattern import AuthorNameInvalidPattern
 
 
 @final
@@ -16,8 +16,8 @@ class AuthorName(object):
         try:
             self.__is_matching()
         except AssertionError:
-            raise AuthorNameMatchException(
-                "no matches for '{0}'".format(self._value)
+            raise AuthorNameInvalidPattern(
+                "no pattern matches for '{0}'".format(self._value)
             )
 
     def __is_matching(self) -> None:

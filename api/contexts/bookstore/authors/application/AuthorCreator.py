@@ -5,9 +5,8 @@ from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorReposit
 
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.contexts.bookstore.authors.domain.InvalidAuthorName import InvalidAuthorName
-
-from api.contexts.bookstore.authors.domain.AuthorIdFormatException import AuthorIdFormatException
-from api.contexts.bookstore.authors.domain.AuthorNameMatchException import AuthorNameMatchException
+from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
+from api.contexts.bookstore.authors.domain.AuthorNameInvalidPattern import AuthorNameInvalidPattern
 
 
 class AuthorCreator:
@@ -21,9 +20,9 @@ class AuthorCreator:
             author = Author.create(id, name)
 
             self.__repository.save(author)
-        except AuthorIdFormatException as e:
+        except AuthorIdInvalidFormat as e:
             self.__logger.error(e)
             raise InvalidAuthorId(id)
-        except AuthorNameMatchException as e:
+        except AuthorNameInvalidPattern as e:
             self.__logger.error(e)
             raise InvalidAuthorName(name)

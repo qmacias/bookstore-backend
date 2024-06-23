@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import final
 
-from api.contexts.bookstore.authors.domain.AuthorIdFormatException import AuthorIdFormatException
+from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
 
 
 @final
@@ -14,7 +14,7 @@ class AuthorId(object):
         try:
             UUID(self._value, version=4)
         except ValueError as e:
-            raise AuthorIdFormatException(str(e)) from e
+            raise AuthorIdInvalidFormat(str(e)) from e
 
     @property
     def value(self) -> str:

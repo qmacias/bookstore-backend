@@ -23,7 +23,9 @@ class AuthorCreator:
             self.__repository.save(author)
         except AuthorIdInvalidFormat as e:
             self.__logger.error(e)
+
             raise InvalidAuthorId(id)
         except AuthorNameInvalidPattern as e:
             self.__logger.error(e)
+
             raise InvalidAuthorName(name)

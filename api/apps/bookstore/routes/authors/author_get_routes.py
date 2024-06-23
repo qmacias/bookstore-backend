@@ -3,7 +3,7 @@ import json
 from flask import Blueprint, Response
 
 from api.contexts.bookstore.authors.domain.Author import AuthorDetails
-from api.contexts.bookstore.authors.domain.AuthorNotExist import AuthorNotExist
+from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
 
 from api.apps.bookstore.deps.BookstoreModule import container
@@ -22,7 +22,7 @@ def search_author(author_id):
                 'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'
             }
         )
-    except (AuthorNotExist, InvalidAuthorId) as e:
+    except (AuthorDoesNotExist, InvalidAuthorId) as e:
         return Response(
             json.dumps({'error': str(e)}), 400, {
                 'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'

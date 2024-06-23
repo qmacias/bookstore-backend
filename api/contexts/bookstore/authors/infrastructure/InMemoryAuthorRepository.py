@@ -4,8 +4,8 @@ from logging import Logger
 
 from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
-from api.contexts.bookstore.authors.domain.AuthorNotExist import AuthorNotExist
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from api.contexts.bookstore.authors.infrastructure.AuthorLookUpFailed import AuthorLookUpFailed
 
 
 class InMemoryAuthorRepository(AuthorRepository):
@@ -27,5 +27,4 @@ class InMemoryAuthorRepository(AuthorRepository):
         try:
             return deepcopy(self.__authors[author_id.value])
         except KeyError as e:
-            self.__logger.error(e)
-            raise AuthorNotExist(author_id.value) from e
+            raise AuthorLookUpFailed(f"author lookup failed: {str(e)}") from e

@@ -1,7 +1,7 @@
 from uuid import UUID
 from typing import final
 
-from api.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
+from src.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
 
 @final

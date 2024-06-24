@@ -1,15 +1,15 @@
 from types import MappingProxyType
 from flask import Blueprint, jsonify, request
 
-from api.apps.bookstore.BookstoreModule import container
+from src.apps.bookstore.BookstoreModule import container
 
-from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
-from api.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
-from api.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
-from api.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
-from api.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
-from api.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
+from src.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
+from src.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
+from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
+from src.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
+from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
+from src.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
 
 authors_blueprint = Blueprint('authors_blueprint', __name__)
 

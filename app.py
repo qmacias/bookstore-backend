@@ -1,7 +1,7 @@
 from flask import Flask, request, make_response
 
-from api.apps.bookstore.blueprints.authors_blueprint import authors_blueprint
-from api.apps.bookstore.blueprints.health_check_blueprint import health_check_blueprint
+from src.apps.bookstore.blueprints.authors_blueprint import authors_blueprint
+from src.apps.bookstore.blueprints.health_check_blueprint import health_check_blueprint
 
 app = Flask(__name__)
 

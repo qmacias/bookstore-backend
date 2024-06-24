@@ -2,11 +2,11 @@ from typing import Dict
 from copy import deepcopy
 from logging import Logger
 
-from api.contexts.bookstore.authors.domain.Author import Author
-from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
-from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from api.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
+from src.contexts.bookstore.authors.domain.Author import Author
+from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
+from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
 
 
 class InMemoryAuthorRepository(AuthorRepository):

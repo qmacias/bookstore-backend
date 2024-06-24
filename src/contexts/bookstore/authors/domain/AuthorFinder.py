@@ -1,6 +1,6 @@
-from api.contexts.bookstore.authors.domain.Author import Author
-from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
-from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from src.contexts.bookstore.authors.domain.Author import Author
+from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
+from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
 
 class AuthorFinder:

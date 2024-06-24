@@ -1,12 +1,12 @@
 from injector import Module, singleton, provider, Injector
 from logging import Logger, getLogger, DEBUG, Formatter, StreamHandler
 
-from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
-from api.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
-from api.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
+from src.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
+from src.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
+from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
 
-from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from api.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
+from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from src.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
 
 class BookstoreModule(Module):

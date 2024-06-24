@@ -1,15 +1,15 @@
 from logging import Logger
 
-from api.contexts.bookstore.authors.domain.Author import Author
-from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
+from src.contexts.bookstore.authors.domain.Author import Author
+from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
-from api.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
-from api.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
+from src.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
+from src.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
-from api.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
-from api.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameInvalidPattern
+from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
+from src.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameInvalidPattern
 
 
 class AuthorCreator:

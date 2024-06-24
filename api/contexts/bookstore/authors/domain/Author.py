@@ -21,12 +21,12 @@ class Author:
         return author
 
     @property
-    def id(self) -> str:
-        return self._id.value
+    def id(self) -> AuthorId:
+        return self._id
 
     @property
-    def name(self) -> str:
-        return self._name.value
+    def name(self) -> AuthorName:
+        return self._name
 
     def change_name(self, value: str) -> None:
         self._name = AuthorName(value)

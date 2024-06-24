@@ -1,10 +1,12 @@
 from flask import Flask, request, make_response, Response
 
+from api.apps.bookstore.routes.authors.author_del_routes import author_del_routes
 from api.apps.bookstore.routes.authors.author_get_routes import author_get_routes
 from api.apps.bookstore.routes.authors.author_put_routes import author_put_routes
 
 app = Flask(__name__)
 
+app.register_blueprint(author_del_routes)
 app.register_blueprint(author_get_routes)
 app.register_blueprint(author_put_routes)
 

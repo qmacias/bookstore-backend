@@ -19,7 +19,7 @@ class InMemoryAuthorRepository(AuthorRepository):
         self.__logger = logger
 
     def save(self, author: Author) -> None:
-        self.__authors[author.id] = deepcopy(author)
+        self.__authors[author.id.value] = deepcopy(author)
 
         self.__logger.info(self.__authors)
 
@@ -28,3 +28,8 @@ class InMemoryAuthorRepository(AuthorRepository):
             return deepcopy(self.__authors[author_id.value])
         except KeyError as e:
             raise AuthorLookUpFailed(f"author lookup failed: {str(e)}") from e
+
+    def delete(self, author_id: AuthorId) -> None:
+        del self.__authors[author_id.value]
+
+        self.__logger.info(self.__authors)

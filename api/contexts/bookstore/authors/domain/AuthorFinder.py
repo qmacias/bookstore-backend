@@ -7,5 +7,7 @@ class AuthorFinder:
     def __init__(self, repository: AuthorRepository) -> None:
         self.__repository = repository
 
-    def __call__(self, author_id: AuthorId) -> Author:
+    def __call__(self, id: str) -> Author:
+        author_id = AuthorId(id)
+
         return self.__repository.find(author_id)

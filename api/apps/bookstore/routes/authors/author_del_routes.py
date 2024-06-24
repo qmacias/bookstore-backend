@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify
 
 from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
-from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
+from api.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
 
 from api.apps.bookstore.deps.BookstoreModule import container
 from api.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
@@ -15,5 +15,5 @@ def remove_author(author_id):
         container.get(AuthorRemover).remove(author_id)
 
         return '', 200, {'Location': f'/authors/{author_id}'}
-    except (AuthorDoesNotExist, AuthorIdNotValid) as e:
+    except (AuthorDoesNotExists, AuthorIdNotValid) as e:
         return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}

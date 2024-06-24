@@ -25,11 +25,11 @@ Create an author
 echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
 
-(*) Create an (invalid) author
+(*) Create an author
 
 {"error": "Author 'cea03186-4606-432c-8d16-ed47276cae5d' already exists."}
 
-ERROR:AuthorLookUpConflict: author lookup conflict: cea03186-4606-432c-8d16-ed47276cae5d
+ERROR:AuthorAlreadyExistsError: duplicate registry: 'cea03186-4606-432c-8d16-ed47276cae5d'
 ```bash
 echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
@@ -57,11 +57,11 @@ Search an author
 http GET http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
 
-(*) Search an (unknown) author
+(*) Search an author
 
 {"error": "Author 'd77fafb5-701e-40b7-b73d-9832a24ed968' does not exist."}
 
-ERROR:AuthorLookUpFailed: author lookup failed: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
+ERROR:AuthorDoesNotExistsError: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
 ```bash
 http GET http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
 ```
@@ -71,11 +71,11 @@ Remove an author
 http DELETE http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
 
-(*) Remove an (unknown) author
+(*) Remove an author
 
 {"error": "Author 'd77fafb5-701e-40b7-b73d-9832a24ed968' does not exist."}
 
-ERROR:AuthorLookUpFailed: author lookup failed: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
+ERROR:AuthorDoesNotExistsError: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
 ```bash
 http DELETE http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
 ```

@@ -4,8 +4,8 @@ from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorFinder import AuthorFinder
 from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
-from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
+from api.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
+from api.contexts.bookstore.authors.domain.AuthorDoesNotExistsError import AuthorDoesNotExistsError
 from api.contexts.bookstore.authors.domain.id.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
 
@@ -24,7 +24,7 @@ class AuthorRemover:
             self.__logger.error(e)
 
             raise AuthorIdNotValid(id)
-        except AuthorLookUpFailed as e:
+        except AuthorDoesNotExistsError as e:
             self.__logger.error(e)
 
-            raise AuthorDoesNotExist(id)
+            raise AuthorDoesNotExists(id)

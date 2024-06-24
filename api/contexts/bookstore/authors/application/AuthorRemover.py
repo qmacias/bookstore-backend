@@ -2,7 +2,7 @@ from logging import Logger
 
 from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorFinder import AuthorFinder
-from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
+from api.contexts.bookstore.authors.domain.AuthorIdInvalid import AuthorIdInvalid
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
 from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
@@ -23,7 +23,7 @@ class AuthorRemover:
         except AuthorIdInvalidFormat as e:
             self.__logger.error(e)
 
-            raise InvalidAuthorId(id)
+            raise AuthorIdInvalid(id)
         except AuthorLookUpFailed as e:
             self.__logger.error(e)
 

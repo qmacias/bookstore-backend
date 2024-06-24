@@ -7,7 +7,7 @@ from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorReposit
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
 from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
 
-from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
+from api.contexts.bookstore.authors.domain.AuthorIdInvalid import AuthorIdInvalid
 from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
 
 
@@ -24,7 +24,7 @@ class AuthorSearcher:
         except AuthorIdInvalidFormat as e:
             self.__logger.error(e)
 
-            raise InvalidAuthorId(id)
+            raise AuthorIdInvalid(id)
         except AuthorLookUpFailed as e:
             self.__logger.error(e)
 

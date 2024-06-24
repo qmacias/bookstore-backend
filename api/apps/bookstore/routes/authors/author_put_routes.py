@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 
-from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
-from api.contexts.bookstore.authors.domain.InvalidAuthorName import InvalidAuthorName
+from api.contexts.bookstore.authors.domain.AuthorIdInvalid import AuthorIdInvalid
+from api.contexts.bookstore.authors.domain.AuthorNameInvalid import AuthorNameInvalid
 from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 
 from api.apps.bookstore.deps.BookstoreModule import container
@@ -18,5 +18,5 @@ def create_author(author_id):
         container.get(AuthorCreator).create(author_id, data.get('name'))
 
         return '', 201, {'Location': f'/authors/{author_id}'}
-    except (AuthorAlreadyExists, InvalidAuthorId, InvalidAuthorName) as e:
+    except (AuthorAlreadyExists, AuthorIdInvalid, AuthorNameInvalid) as e:
         return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}

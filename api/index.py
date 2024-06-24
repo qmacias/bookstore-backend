@@ -1,14 +1,12 @@
 from flask import Flask, request, make_response
 
-from api.apps.bookstore.routes.authors.author_del_routes import author_del_routes
-from api.apps.bookstore.routes.authors.author_get_routes import author_get_routes
-from api.apps.bookstore.routes.authors.author_put_routes import author_put_routes
+from api.apps.bookstore.blueprints.authors_blueprint import authors_blueprint
+from api.apps.bookstore.blueprints.health_check_blueprint import health_check_blueprint
 
 app = Flask(__name__)
 
-app.register_blueprint(author_del_routes)
-app.register_blueprint(author_get_routes)
-app.register_blueprint(author_put_routes)
+app.register_blueprint(authors_blueprint)
+app.register_blueprint(health_check_blueprint)
 
 
 @app.after_request
@@ -28,11 +26,6 @@ def after_request_func(response):
             response.headers.add('Access-Control-Allow-Origin', origin)
 
     return response
-
-
-@app.route('/health_check', methods=['GET'])
-def health_check():
-    return '', 200, {'Location': f'{request.url_rule.rule}'}
 
 
 if __name__ == '__main__':

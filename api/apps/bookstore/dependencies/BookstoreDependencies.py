@@ -9,7 +9,7 @@ from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorReposit
 from api.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
 
-class BookstoreModule(Module):
+class BookstoreDependencies(Module):
 
     @singleton
     @provider
@@ -44,4 +44,4 @@ class BookstoreModule(Module):
         return AuthorSearcher(repository, logger)
 
 
-container = Injector([BookstoreModule], auto_bind=True)
+container = Injector([BookstoreDependencies], auto_bind=True)

@@ -7,8 +7,8 @@ from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorReposit
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
 from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
 
-from api.contexts.bookstore.authors.domain.AuthorIdInvalid import AuthorIdInvalid
-from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
+from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
+from api.contexts.bookstore.authors.domain.id.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
 
 class AuthorSearcher:
@@ -21,10 +21,10 @@ class AuthorSearcher:
             author: Author = self.__finder(id)
 
             return author.to_primitives()
-        except AuthorIdInvalidFormat as e:
+        except AuthorIdNotValidFormat as e:
             self.__logger.error(e)
 
-            raise AuthorIdInvalid(id)
+            raise AuthorIdNotValid(id)
         except AuthorLookUpFailed as e:
             self.__logger.error(e)
 

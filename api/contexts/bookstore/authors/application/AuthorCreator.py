@@ -3,13 +3,13 @@ from logging import Logger
 from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
-from api.contexts.bookstore.authors.domain.AuthorIdInvalid import AuthorIdInvalid
+from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
 from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 from api.contexts.bookstore.authors.domain.AuthorLookUpConflict import AuthorLookUpConflict
-from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
+from api.contexts.bookstore.authors.domain.id.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
-from api.contexts.bookstore.authors.domain.AuthorNameInvalid import AuthorNameInvalid
-from api.contexts.bookstore.authors.domain.AuthorNameInvalidPattern import AuthorNameInvalidPattern
+from api.contexts.bookstore.authors.domain.name.AuthorNameNotValid import AuthorNameNotValid
+from api.contexts.bookstore.authors.domain.name.AuthorNameNotValidPattern import AuthorNameInvalidPattern
 
 
 class AuthorCreator:
@@ -22,14 +22,14 @@ class AuthorCreator:
             author = Author.create(id, name)
 
             self.__repository.save(author)
-        except AuthorIdInvalidFormat as e:
+        except AuthorIdNotValidFormat as e:
             self.__logger.error(e)
 
-            raise AuthorIdInvalid(id)
+            raise AuthorIdNotValid(id)
         except AuthorNameInvalidPattern as e:
             self.__logger.error(e)
 
-            raise AuthorNameInvalid(name)
+            raise AuthorNameNotValid(name)
         except AuthorLookUpConflict as e:
             self.__logger.error(e)
 

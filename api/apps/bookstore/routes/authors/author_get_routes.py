@@ -1,7 +1,7 @@
 from types import MappingProxyType
 from flask import Blueprint, jsonify
 
-from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
+from api.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
 
 from api.apps.bookstore.deps.BookstoreModule import container
@@ -18,5 +18,5 @@ def search_author(author_id):
         )
 
         return jsonify(dict(author)), 200, {'Location': f'/authors/{author_id}'}
-    except (AuthorDoesNotExists, AuthorIdNotValid) as e:
+    except (AuthorIdNotValid, AuthorDoesNotExists) as e:
         return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}

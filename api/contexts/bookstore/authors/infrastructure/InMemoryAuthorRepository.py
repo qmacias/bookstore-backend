@@ -3,10 +3,10 @@ from copy import deepcopy
 from logging import Logger
 
 from api.contexts.bookstore.authors.domain.Author import Author
-from api.contexts.bookstore.authors.domain.id.AuthorId import AuthorId
+from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from api.contexts.bookstore.authors.domain.AuthorDoesNotExistsError import AuthorDoesNotExistsError
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsError import AuthorAlreadyExistsError
+from api.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
+from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
 
 
 class InMemoryAuthorRepository(AuthorRepository):
@@ -22,7 +22,7 @@ class InMemoryAuthorRepository(AuthorRepository):
     def save(self, author: Author) -> None:
         for existing_author in self.__authors.values():
             if existing_author.id == author.id:
-                raise AuthorAlreadyExistsError(f"duplicate registry: '{author.id.value}'")
+                raise AuthorAlreadyExistsDuplicate(f"duplicate registry: '{author.id.value}'")
 
         self.__authors[author.id.value] = deepcopy(author)
 
@@ -32,7 +32,7 @@ class InMemoryAuthorRepository(AuthorRepository):
         try:
             return deepcopy(self.__authors[author_id.value])
         except KeyError as e:
-            raise AuthorDoesNotExistsError(f'unknown registry: {str(e)}') from e
+            raise AuthorDoesNotExistsUnknown(f'unknown registry: {str(e)}') from e
 
     def delete(self, author_id: AuthorId) -> None:
         del self.__authors[author_id.value]

@@ -29,7 +29,7 @@ echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-46
 
 {"error": "Author 'cea03186-4606-432c-8d16-ed47276cae5d' already exists."}
 
-ERROR:AuthorAlreadyExistsError: duplicate registry: 'cea03186-4606-432c-8d16-ed47276cae5d'
+ERROR:AuthorAlreadyExistsDuplicate: duplicate registry: 'cea03186-4606-432c-8d16-ed47276cae5d'
 ```bash
 echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
@@ -61,7 +61,7 @@ http GET http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 
 {"error": "Author 'd77fafb5-701e-40b7-b73d-9832a24ed968' does not exist."}
 
-ERROR:AuthorDoesNotExistsError: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
+ERROR:AuthorDoesNotExistsUnknown: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
 ```bash
 http GET http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
 ```
@@ -75,7 +75,7 @@ http DELETE http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 
 {"error": "Author 'd77fafb5-701e-40b7-b73d-9832a24ed968' does not exist."}
 
-ERROR:AuthorDoesNotExistsError: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
+ERROR:AuthorDoesNotExistsUnknown: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
 ```bash
 http DELETE http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
 ```

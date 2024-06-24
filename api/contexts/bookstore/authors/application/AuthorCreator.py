@@ -3,13 +3,13 @@ from logging import Logger
 from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
-from api.contexts.bookstore.authors.domain.id.AuthorIdNotValid import AuthorIdNotValid
+from api.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
 from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
-from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsError import AuthorAlreadyExistsError
-from api.contexts.bookstore.authors.domain.id.AuthorIdNotValidFormat import AuthorIdNotValidFormat
+from api.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
+from api.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
 
-from api.contexts.bookstore.authors.domain.name.AuthorNameNotValid import AuthorNameNotValid
-from api.contexts.bookstore.authors.domain.name.AuthorNameNotValidPattern import AuthorNameInvalidPattern
+from api.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
+from api.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameInvalidPattern
 
 
 class AuthorCreator:
@@ -30,7 +30,7 @@ class AuthorCreator:
             self.__logger.error(e)
 
             raise AuthorNameNotValid(name)
-        except AuthorAlreadyExistsError as e:
+        except AuthorAlreadyExistsDuplicate as e:
             self.__logger.error(e)
 
             raise AuthorAlreadyExists(id)

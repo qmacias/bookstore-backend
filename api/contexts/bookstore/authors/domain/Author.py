@@ -1,7 +1,7 @@
 from types import MappingProxyType
 
-from api.contexts.bookstore.authors.domain.id.AuthorId import AuthorId
-from api.contexts.bookstore.authors.domain.name.AuthorName import AuthorName
+from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
+from api.contexts.bookstore.authors.domain.AuthorName import AuthorName
 
 
 class Author:

@@ -1,7 +1,7 @@
 from re import match
 from typing import final
 
-from api.contexts.bookstore.authors.domain.name.AuthorNameNotValidPattern import AuthorNameInvalidPattern
+from api.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameInvalidPattern
 
 
 @final

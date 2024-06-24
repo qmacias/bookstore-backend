@@ -28,6 +28,8 @@ echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-46
 (*) Create an (invalid) author
 
 { "error": "Author with id 'cea03186-4606-432c-8d16-ed47276cae5d' already exists" }
+
+ERROR:AuthorLookUpConflict: author lookup conflict: cea03186-4606-432c-8d16-ed47276cae5d
 ```bash
 echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```

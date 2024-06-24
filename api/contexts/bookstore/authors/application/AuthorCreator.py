@@ -4,6 +4,8 @@ from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
+from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
+from api.contexts.bookstore.authors.domain.AuthorLookUpConflict import AuthorLookUpConflict
 from api.contexts.bookstore.authors.domain.AuthorIdInvalidFormat import AuthorIdInvalidFormat
 
 from api.contexts.bookstore.authors.domain.InvalidAuthorName import InvalidAuthorName
@@ -28,3 +30,7 @@ class AuthorCreator:
             self.__logger.error(e)
 
             raise InvalidAuthorName(name)
+        except AuthorLookUpConflict as e:
+            self.__logger.error(e)
+
+            raise AuthorAlreadyExists(id)

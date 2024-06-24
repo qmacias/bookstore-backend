@@ -1,7 +1,8 @@
 from logging import Logger
+from types import MappingProxyType
 
+from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorFinder import AuthorFinder
-from api.contexts.bookstore.authors.domain.Author import Author, AuthorDetails
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
 from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
@@ -15,7 +16,7 @@ class AuthorSearcher:
         self.__finder = AuthorFinder(repository)
         self.__logger = logger
 
-    def search(self, id: str) -> AuthorDetails:
+    def search(self, id: str) -> MappingProxyType:
         try:
             author: Author = self.__finder(id)
 

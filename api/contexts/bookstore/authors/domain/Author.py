@@ -1,12 +1,7 @@
-from typing import TypedDict
+from types import MappingProxyType
 
 from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from api.contexts.bookstore.authors.domain.AuthorName import AuthorName
-
-
-class AuthorDetails(TypedDict):
-    id: str
-    name: str
 
 
 class Author:
@@ -31,8 +26,11 @@ class Author:
     def change_name(self, value: str) -> None:
         self._name = AuthorName(value)
 
-    def to_primitives(self) -> AuthorDetails:
-        return AuthorDetails(id=self._id.value, name=self._name.value)
+    def to_primitives(self) -> MappingProxyType:
+        return MappingProxyType({
+            'id': self._id.value,
+            'name': self._name.value,
+        })
 
     def __hash__(self) -> int:
         return hash((self._id, self._name))

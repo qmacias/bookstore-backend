@@ -1,6 +1,4 @@
-import json
-
-from flask import Blueprint, Response
+from flask import Blueprint, jsonify
 
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.contexts.bookstore.authors.domain.AuthorDoesNotExist import AuthorDoesNotExist
@@ -16,14 +14,6 @@ def remove_author(author_id):
     try:
         container.get(AuthorRemover).remove(author_id)
 
-        return Response(
-            '', 200, {
-                'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'
-            }
-        )
+        return '', 200, {'Location': f'/authors/{author_id}'}
     except (AuthorDoesNotExist, InvalidAuthorId) as e:
-        return Response(
-            json.dumps({"error": str(e)}), 400, {
-                'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'
-            }
-        )
+        return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}

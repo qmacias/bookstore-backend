@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, Response
+from flask import Flask, request, make_response
 
 from api.apps.bookstore.routes.authors.author_del_routes import author_del_routes
 from api.apps.bookstore.routes.authors.author_get_routes import author_get_routes
@@ -32,11 +32,7 @@ def after_request_func(response):
 
 @app.route('/health_check', methods=['GET'])
 def health_check():
-    return Response(
-        '', 200, {
-            'Content-Type': 'application/json', 'Location': f'{request.url_rule.rule}'
-        }
-    )
+    return '', 200, {'Location': f'{request.url_rule.rule}'}
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 from types import MappingProxyType
 from flask import Blueprint, jsonify, request
 
-from api.apps.bookstore.dependencies.BookstoreDependencies import container
+from api.apps.bookstore.BookstoreModule import container
 
 from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
 from api.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover

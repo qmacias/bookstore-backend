@@ -10,6 +10,7 @@ Here the client interacts with the provided Flask API endpoints.
 |--------|-------------------------------------------|------------------|
 | GET    | http://127.0.0.1:5000/health_check        | Health check     |
 | PUT    | http://127.0.0.1:5000/authors/{author_id} | Create an author |
+| PATCH  | http://127.0.0.1:5000/authors/{author_id} | Modify an author |
 | GET    | http://127.0.0.1:5000/authors/{author_id} | Search an author |
 | DELETE | http://127.0.0.1:5000/authors/{author_id} | Remove an author |
 
@@ -52,6 +53,11 @@ ERROR:AuthorNameNotValidPattern: no pattern for 'john_doe'
 echo '{"name": "john_doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
 
+Modify an author
+```bash
+echo '{"name": "Margaret Jones"}' | http PATCH http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
+```
+
 Search an author
 ```bash
 http GET http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
@@ -71,11 +77,6 @@ Remove an author
 http DELETE http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
 
-(*) Remove an author
-
-{"error": "Author 'd77fafb5-701e-40b7-b73d-9832a24ed968' does not exist."}
-
-ERROR:AuthorDoesNotExistsUnknown: unknown registry: 'd77fafb5-701e-40b7-b73d-9832a24ed968'
 ```bash
 http DELETE http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
 ```

@@ -10,6 +10,10 @@ class AuthorRepository(ABC):
         raise NotImplementedError('Must be implemented.')
 
     @abstractmethod
+    def update(self, author: Author) -> None:
+        raise NotImplementedError('Must be implemented.')
+
+    @abstractmethod
     def find(self, author_id: AuthorId) -> Author:
         raise NotImplementedError('Must be implemented.')
 

@@ -6,24 +6,33 @@ from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import Aut
 from src.contexts.bookstore.authors.domain.AuthorFinder import AuthorFinder
 from src.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
 from src.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorIdNotValidFormat
+from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
+from src.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameNotValidPattern
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
 
-class AuthorRemover:
+class AuthorModifier:
+
     def __init__(self, repository: AuthorRepository, logger: Logger) -> None:
         self.__repository = repository
         self.__finder = AuthorFinder(repository)
         self.__logger = logger
 
-    def remove(self, id: str) -> None:
+    def modify(self, id: str, name: str) -> None:
         try:
             author: Author = self.__finder(id)
 
-            self.__repository.delete(author.id)
+            author.change_name(name)
+
+            self.__repository.update(author)
         except AuthorIdNotValidFormat as e:
             self.__logger.error(e)
 
             raise AuthorIdNotValid(id)
+        except AuthorNameNotValidPattern as e:
+            self.__logger.error(e)
+
+            raise AuthorNameNotValid(name)
         except AuthorDoesNotExistsUnknown as e:
             self.__logger.error(e)
 

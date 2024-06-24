@@ -1,12 +1,12 @@
-from typing import Dict
 from copy import deepcopy
 from logging import Logger
+from typing import Dict
 
 from src.contexts.bookstore.authors.domain.Author import Author
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
+from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
 from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
-from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
-from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
 
 
 class InMemoryAuthorRepository(AuthorRepository):
@@ -24,6 +24,11 @@ class InMemoryAuthorRepository(AuthorRepository):
             if existing_author.id == author.id:
                 raise AuthorAlreadyExistsDuplicate(f"duplicate registry: '{author.id.value}'")
 
+        self.__authors[author.id.value] = deepcopy(author)
+
+        self.__logger.info(self.__authors)
+
+    def update(self, author: Author) -> None:
         self.__authors[author.id.value] = deepcopy(author)
 
         self.__logger.info(self.__authors)

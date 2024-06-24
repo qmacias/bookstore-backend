@@ -4,6 +4,7 @@ from flask import Blueprint, request, Response
 
 from api.contexts.bookstore.authors.domain.InvalidAuthorId import InvalidAuthorId
 from api.contexts.bookstore.authors.domain.InvalidAuthorName import InvalidAuthorName
+from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 
 from api.apps.bookstore.deps.BookstoreModule import container
 from api.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
@@ -23,7 +24,7 @@ def create_author(author_id):
                 'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'
             }
         )
-    except (InvalidAuthorId, InvalidAuthorName) as e:
+    except (AuthorAlreadyExists, InvalidAuthorId, InvalidAuthorName) as e:
         return Response(
             json.dumps({'error': str(e)}), 400, {
                 'Content-Type': 'application/json', 'Location': f'/authors/{author_id}'

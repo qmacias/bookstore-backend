@@ -27,6 +27,10 @@ echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-46
 
 (*) Create an (invalid) author
 
+{ "error": "Author with id 'cea03186-4606-432c-8d16-ed47276cae5d' already exists" }
+```bash
+echo '{"name": "John Doe"}' | http PUT http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
+```
 { "error": "Invalid author id 'cea03186-4606-432c-8d16-ed47276cae5.'" }
 
 ERROR:AuthorIdFormatException: invalid literal for int() with base 16: 'cea031864606432c8d16ed47276cae5.'

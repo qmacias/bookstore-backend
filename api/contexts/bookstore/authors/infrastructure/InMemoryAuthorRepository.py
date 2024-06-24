@@ -6,6 +6,7 @@ from api.contexts.bookstore.authors.domain.Author import Author
 from api.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from api.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from api.contexts.bookstore.authors.domain.AuthorLookUpFailed import AuthorLookUpFailed
+from api.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 
 
 class InMemoryAuthorRepository(AuthorRepository):
@@ -19,6 +20,10 @@ class InMemoryAuthorRepository(AuthorRepository):
         self.__logger = logger
 
     def save(self, author: Author) -> None:
+        for existing_author in self.__authors.values():
+            if existing_author.id == author.id:
+                raise AuthorAlreadyExists(author.id.value)
+
         self.__authors[author.id.value] = deepcopy(author)
 
         self.__logger.info(self.__authors)

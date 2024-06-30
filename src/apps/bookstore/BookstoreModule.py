@@ -1,5 +1,7 @@
-from logging import Logger, getLogger, DEBUG, Formatter, StreamHandler
+from logging import Logger
 from injector import Module, singleton, provider, Injector
+
+from src.apps.bookstore.config_logger import config_logger
 
 from src.contexts.bookstore.authors.application.AuthorCreator import AuthorCreator
 from src.contexts.bookstore.authors.application.AuthorModifier import AuthorModifier
@@ -15,17 +17,7 @@ class BookstoreModule(Module):
     @singleton
     @provider
     def logger(self) -> Logger:
-        logger = getLogger(__name__)
-        logger.setLevel(DEBUG)
-
-        formatter = Formatter('%(levelname)s:%(message)s')
-
-        stream_handler = StreamHandler()
-        stream_handler.setFormatter(formatter)
-
-        logger.addHandler(stream_handler)
-
-        return logger
+        return config_logger(__name__)
 
     @singleton
     @provider

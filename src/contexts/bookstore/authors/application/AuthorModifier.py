@@ -22,7 +22,7 @@ class AuthorModifier:
         try:
             author: Author = self.__finder(id)
 
-            author.change_name(name)
+            author.name = name
 
             self.__repository.update(author)
         except AuthorIdNotValidFormat as e:

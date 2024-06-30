@@ -49,7 +49,7 @@ class BookstoreModule(Module):
         return AuthorSearcher(repository, logger)
 
     @provider
-    def author_searcher(self, repository: AuthorRepository, logger: Logger) -> AuthorsSearcher:
+    def authors_searcher(self, repository: AuthorRepository, logger: Logger) -> AuthorsSearcher:
         return AuthorsSearcher(repository, logger)
 
 

@@ -23,7 +23,8 @@ class Author:
     def name(self) -> AuthorName:
         return self._name
 
-    def change_name(self, value: str) -> None:
+    @name.setter
+    def name(self, value: str) -> None:
         self._name = AuthorName(value)
 
     def to_primitives(self) -> MappingProxyType:

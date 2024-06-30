@@ -5,6 +5,7 @@ from src.contexts.bookstore.authors.application.AuthorCreator import AuthorCreat
 from src.contexts.bookstore.authors.application.AuthorModifier import AuthorModifier
 from src.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
 from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
+from src.contexts.bookstore.authors.application.AuthorsSearcher import AuthorsSearcher
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from src.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
 
@@ -46,6 +47,10 @@ class BookstoreModule(Module):
     @provider
     def author_searcher(self, repository: AuthorRepository, logger: Logger) -> AuthorSearcher:
         return AuthorSearcher(repository, logger)
+
+    @provider
+    def author_searcher(self, repository: AuthorRepository, logger: Logger) -> AuthorsSearcher:
+        return AuthorsSearcher(repository, logger)
 
 
 container = Injector([BookstoreModule], auto_bind=True)

@@ -1,4 +1,6 @@
+from typing import Sequence
 from types import MappingProxyType
+
 from flask import Blueprint, jsonify, request
 
 from src.apps.bookstore.BookstoreModule import container
@@ -6,12 +8,24 @@ from src.contexts.bookstore.authors.application.AuthorCreator import AuthorCreat
 from src.contexts.bookstore.authors.application.AuthorModifier import AuthorModifier
 from src.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
 from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
+from src.contexts.bookstore.authors.application.AuthorsSearcher import AuthorsSearcher
 from src.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 from src.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
 from src.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
 from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
 
 authors_blueprint = Blueprint('authors_blueprint', __name__)
+
+
+@authors_blueprint.route('/authors', methods=['GET'])
+def search_all_authors():
+    authors: Sequence[MappingProxyType] = (
+        container.get(AuthorsSearcher).search_all()
+    )
+
+    items = [dict(author) for author in authors]
+
+    return jsonify(items), 200, {'Location': f'{request.url_rule.rule}'}
 
 
 @authors_blueprint.route('/authors/<author_id>', methods=['PUT'])

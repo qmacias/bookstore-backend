@@ -1,6 +1,6 @@
 from copy import deepcopy
 from logging import Logger
-from typing import Dict
+from typing import Dict, Sequence
 
 from src.contexts.bookstore.authors.domain.Author import Author
 from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
@@ -18,6 +18,9 @@ class InMemoryAuthorRepository(AuthorRepository):
 
     def __init__(self, logger: Logger) -> None:
         self.__logger = logger
+
+    def find_all(self) -> Sequence[Author]:
+        return list(self.__authors.values())
 
     def save(self, author: Author) -> None:
         for existing_author in self.__authors.values():

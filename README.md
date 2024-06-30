@@ -9,6 +9,7 @@ Here the client interacts with the provided Flask API endpoints.
 | Method | Url                                       | Description      |
 |--------|-------------------------------------------|------------------|
 | GET    | http://127.0.0.1:5000/health_check        | Health check     |
+| GET    | http://127.0.0.1:5000/authors             | Search authors   |
 | PUT    | http://127.0.0.1:5000/authors/{author_id} | Create an author |
 | PATCH  | http://127.0.0.1:5000/authors/{author_id} | Modify an author |
 | GET    | http://127.0.0.1:5000/authors/{author_id} | Search an author |
@@ -19,6 +20,11 @@ Here the client interacts with the provided Flask API endpoints.
 Health check
 ```bash
 http GET http://127.0.0.1:5000/health_check
+```
+
+Search authors:
+```bash
+http GET http://127.0.0.1:5000/authors
 ```
 
 Create an author

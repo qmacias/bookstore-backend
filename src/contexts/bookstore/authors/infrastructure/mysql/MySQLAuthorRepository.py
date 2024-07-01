@@ -15,12 +15,12 @@ from src.contexts.bookstore.authors.infrastructure.mysql.MySQLAuthorEnviron impo
 class MySQLAuthorRepository(AuthorRepository):
     def __init__(self, environ: MySQLAuthorEnviron, logger: Logger) -> None:
         self.__pool = MySQLConnectionPool(
-            pool_name='bookstore_pool',
-            pool_size=5,
             host=environ.host,
             user=environ.user,
             password=environ.password,
             database=environ.database,
+            pool_name=environ.pool_name,
+            pool_size=environ.pool_size,
         )
         self.__logger = logger
 

@@ -48,7 +48,7 @@ def modify_author(author_id):
         container.get(AuthorModifier).modify(author_id, data.get('name'))
 
         return '', 200, {'Location': f'/authors/{author_id}'}
-    except (AuthorIdNotValid, AuthorNameNotValid, AuthorAlreadyExists) as e:
+    except (AuthorIdNotValid, AuthorNameNotValid, AuthorDoesNotExists) as e:
         return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}
 
 

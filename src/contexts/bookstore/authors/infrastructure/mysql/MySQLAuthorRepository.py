@@ -3,6 +3,8 @@ from mysql import connector
 from typing import Sequence
 
 from src.contexts.bookstore.authors.domain.Author import Author
+from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
+from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
 from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from src.contexts.bookstore.authors.infrastructure.mysql.MySQLAuthorEnviron import MySQLAuthorEnviron
@@ -21,9 +23,9 @@ class MySQLAuthorRepository(AuthorRepository):
     def find_all(self) -> Sequence[Author]:
         cursor = self.__db.cursor(dictionary=True)
 
-        cursor.execute('''
+        cursor.execute("""
             SELECT BIN_TO_UUID(id, true) AS id, name FROM authors
-        ''')
+        """)
 
         records = cursor.fetchall()
 
@@ -36,24 +38,27 @@ class MySQLAuthorRepository(AuthorRepository):
         return authors
 
     def save(self, author: Author) -> None:
-        cursor = self.__db.cursor()
+        try:
+            cursor = self.__db.cursor()
 
-        cursor.execute('''
-            INSERT INTO authors (id, name)
-            VALUES (UUID_TO_BIN(%s, true), %s)
-        ''', (author.id.value, author.name.value,))
+            cursor.execute("""
+                INSERT INTO authors (id, name)
+                VALUES (UUID_TO_BIN(%s, true), %s)
+            """, (author.id.value, author.name.value,))
 
-        self.__db.commit()
+            self.__db.commit()
 
-        cursor.close()
+            cursor.close()
+        except connector.Error as e:
+            raise AuthorAlreadyExistsDuplicate(str(e)) from e
 
     def update(self, author: Author) -> None:
         cursor = self.__db.cursor()
 
-        cursor.execute('''
+        cursor.execute("""
             UPDATE authors SET name = %s
             WHERE id = UUID_TO_BIN(%s, true)
-        ''', (author.name.value, author.id.value,))
+        """, (author.name.value, author.id.value,))
 
         self.__db.commit()
 
@@ -62,12 +67,15 @@ class MySQLAuthorRepository(AuthorRepository):
     def find(self, author_id: AuthorId) -> Author:
         cursor = self.__db.cursor(dictionary=True)
 
-        cursor.execute('''
+        cursor.execute("""
             SELECT BIN_TO_UUID(id, true) AS id, name
             FROM authors WHERE id = UUID_TO_BIN(%s, true)
-        ''', (author_id.value,))
+        """, (author_id.value,))
 
         row = cursor.fetchone()
+
+        if row is None:
+            raise AuthorDoesNotExistsUnknown(f"unknown registry: '{author_id.value}'")
 
         self.__logger.info(row)
 
@@ -80,9 +88,9 @@ class MySQLAuthorRepository(AuthorRepository):
     def delete(self, author_id: AuthorId) -> None:
         cursor = self.__db.cursor()
 
-        cursor.execute('''
+        cursor.execute("""
             DELETE FROM authors WHERE id = UUID_TO_BIN(%s, true)
-        ''', (author_id.value,))
+        """, (author_id.value,))
 
         self.__db.commit()
 

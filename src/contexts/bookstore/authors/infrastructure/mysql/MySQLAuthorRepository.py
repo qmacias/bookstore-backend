@@ -56,7 +56,7 @@ class MySQLAuthorRepository(AuthorRepository):
 
         self.__logger.info(f'Retrieved {len(records)} authors: {records}')
 
-        return [Author.create(id=row['id'], name=row['name']) for row in records]
+        return [Author.create(id=row.get('id'), name=row.get('name', 'Unknown')) for row in records]
 
     def save(self, author: Author) -> None:
         try:
@@ -96,7 +96,7 @@ class MySQLAuthorRepository(AuthorRepository):
 
         self.__logger.info(f'Retrieved author: {row}')
 
-        return Author.create(id=row['id'], name=row['name'])
+        return Author.create(id=row.get('id'), name=row.get('name', 'Unknown'))
 
     def delete(self, author_id: AuthorId) -> None:
         with self.get_connection() as connection:

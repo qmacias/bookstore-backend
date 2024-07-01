@@ -1,0 +1,7 @@
+CREATE DATABASE IF NOT EXISTS bookstore_db
+DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE bookstore_db;
+
+-- DROP TABLE IF EXISTS authors;
+CREATE TABLE authors (id BINARY(16) NOT NULL, name VARCHAR(255) UNIQUE NOT NULL, PRIMARY KEY (id));

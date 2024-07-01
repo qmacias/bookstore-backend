@@ -2,3 +2,4 @@ flask
 httpie
 injector
 python-dotenv
+mysql-connector-python

@@ -82,7 +82,3 @@ Remove an author
 ```bash
 http DELETE http://127.0.0.1:5000/authors/cea03186-4606-432c-8d16-ed47276cae5d
 ```
-
-```bash
-http DELETE http://127.0.0.1:5000/authors/d77fafb5-701e-40b7-b73d-9832a24ed968
-```

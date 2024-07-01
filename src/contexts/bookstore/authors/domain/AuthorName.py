@@ -9,10 +9,10 @@ class AuthorName(object):
     __REGEX = r'^[A-Z][a-z]+(\s[A-Z][a-z]+)*$'
 
     def __init__(self, value: str) -> None:
-        self._value = value
-        self.__ensure_valid_name()
+        self._value = value.strip()
+        self.__ensure_valid_author_name()
 
-    def __ensure_valid_name(self) -> None:
+    def __ensure_valid_author_name(self) -> None:
         try:
             assert match(self.__REGEX, self._value) is not None
         except AssertionError:

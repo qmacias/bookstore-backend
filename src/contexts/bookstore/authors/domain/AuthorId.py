@@ -7,10 +7,10 @@ from src.contexts.bookstore.authors.domain.AuthorIdNotValidFormat import AuthorI
 @final
 class AuthorId(object):
     def __init__(self, value: str) -> None:
-        self._value = value
-        self.__ensure_valid_id()
+        self._value = value.strip()
+        self.__ensure_valid_author_id()
 
-    def __ensure_valid_id(self) -> None:
+    def __ensure_valid_author_id(self) -> None:
         try:
             UUID(self._value, version=4)
         except ValueError as e:

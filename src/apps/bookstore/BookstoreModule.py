@@ -10,6 +10,8 @@ from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSear
 from src.contexts.bookstore.authors.application.AuthorsSearcher import AuthorsSearcher
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from src.contexts.bookstore.authors.infrastructure.InMemoryAuthorRepository import InMemoryAuthorRepository
+from src.contexts.bookstore.authors.infrastructure.mysql.MySQLAuthorEnviron import MySQLAuthorEnviron
+from src.contexts.bookstore.authors.infrastructure.mysql.MySQLAuthorRepository import MySQLAuthorRepository
 
 
 class BookstoreModule(Module):
@@ -22,7 +24,12 @@ class BookstoreModule(Module):
     @singleton
     @provider
     def author_repository(self, logger: Logger) -> AuthorRepository:
-        return InMemoryAuthorRepository(logger)
+        # return InMemoryAuthorRepository(logger)
+
+        environ = MySQLAuthorEnviron.create()
+        repository = MySQLAuthorRepository(environ, logger)
+
+        return repository
 
     @provider
     def author_creator(self, repository: AuthorRepository, logger: Logger) -> AuthorCreator:

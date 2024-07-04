@@ -1,6 +1,7 @@
 from re import match
 from typing import final
 
+from src.contexts.bookstore.authors.domain.AuthorNameNotValidType import AuthorNameNotValidType
 from src.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameNotValidPattern
 
 
@@ -9,13 +10,15 @@ class AuthorName(object):
     __REGEX = r'^[A-Z][a-z]+(\s[A-Z][a-z]+)*$'
 
     def __init__(self, value: str) -> None:
-        self._value = value.strip()
+        try:
+            self._value = value.strip()
+        except AttributeError as e:
+            raise AuthorNameNotValidType(str(e))
+
         self.__ensure_valid_author_name()
 
     def __ensure_valid_author_name(self) -> None:
-        try:
-            assert match(self.__REGEX, self._value) is not None
-        except AssertionError:
+        if not match(self.__REGEX, self._value):
             raise AuthorNameNotValidPattern(f"no pattern for '{self._value}'")
 
     @property

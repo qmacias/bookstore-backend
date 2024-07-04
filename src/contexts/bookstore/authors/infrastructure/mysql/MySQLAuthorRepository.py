@@ -1,13 +1,14 @@
 from logging import Logger
-from mysql import connector
-from mysql.connector.pooling import MySQLConnectionPool
 from typing import Sequence
 from contextlib import contextmanager
+from mysql.connector.errors import Error
+from mysql.connector.pooling import MySQLConnectionPool
 
 from src.contexts.bookstore.authors.domain.Author import Author
-from src.contexts.bookstore.authors.domain.AuthorAlreadyExistsDuplicate import AuthorAlreadyExistsDuplicate
 from src.contexts.bookstore.authors.domain.AuthorDoesNotExistsUnknown import AuthorDoesNotExistsUnknown
 from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
+from src.contexts.bookstore.authors.domain.AuthorName import AuthorName
+from src.contexts.bookstore.authors.domain.AuthorNameAlreadyExistsIntegrity import AuthorNameAlreadyExistsIntegrity
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 from src.contexts.bookstore.authors.infrastructure.mysql.MySQLAuthorEnviron import MySQLAuthorEnviron
 
@@ -44,43 +45,6 @@ class MySQLAuthorRepository(AuthorRepository):
         finally:
             cursor.close()
 
-    def find_all(self) -> Sequence[Author]:
-        with self.get_connection() as connection:
-            with self.get_cursor(connection) as cursor:
-                cursor.execute("""
-                    SELECT BIN_TO_UUID(id, true) AS id, name
-                    FROM authors
-                """)
-
-                records = cursor.fetchall()
-
-        self.__logger.info(f'Retrieved {len(records)} authors: {records}')
-
-        return [Author.create(id=row.get('id'), name=row.get('name', 'Unknown')) for row in records]
-
-    def save(self, author: Author) -> None:
-        try:
-            with self.get_connection() as connection:
-                with self.get_cursor(connection) as cursor:
-                    cursor.execute("""
-                        INSERT INTO authors (id, name)
-                        VALUES (UUID_TO_BIN(%s, true), %s)
-                    """, (author.id.value, author.name.value,))
-
-            self.__logger.info(f"Saved author with id: '{author.id.value}'")
-        except connector.Error as e:
-            raise AuthorAlreadyExistsDuplicate(str(e)) from e
-
-    def update(self, author: Author) -> None:
-        with self.get_connection() as connection:
-            with self.get_cursor(connection) as cursor:
-                cursor.execute("""
-                    UPDATE authors SET name = %s
-                    WHERE id = UUID_TO_BIN(%s, true)
-                """, (author.name.value, author.id.value,))
-
-        self.__logger.info(f"Updated author with id: '{author.id.value}'")
-
     def find(self, author_id: AuthorId) -> Author:
         with self.get_connection() as connection:
             with self.get_cursor(connection) as cursor:
@@ -96,7 +60,44 @@ class MySQLAuthorRepository(AuthorRepository):
 
         self.__logger.info(f'Retrieved author: {row}')
 
-        return Author.create(id=row.get('id'), name=row.get('name', 'Unknown'))
+        return Author.from_primitives(row)
+
+    def find_all(self) -> Sequence[Author]:
+        with self.get_connection() as connection:
+            with self.get_cursor(connection) as cursor:
+                cursor.execute("""
+                    SELECT BIN_TO_UUID(id, true) AS id, name
+                    FROM authors
+                """)
+
+                rows = cursor.fetchall()
+
+        self.__logger.info(f'Retrieved {len(rows)} author/s: {rows}')
+
+        return [Author.from_primitives(row) for row in rows]
+
+    def save(self, author: Author) -> None:
+        try:
+            with self.get_connection() as connection:
+                with self.get_cursor(connection) as cursor:
+                    cursor.execute("""
+                        INSERT INTO authors (id, name)
+                        VALUES (UUID_TO_BIN(%s, true), %s)
+                    """, (author.id.value, author.name.value,))
+
+            self.__logger.info(f"Created author with id: '{author.id.value}'")
+        except Error as e:
+            raise AuthorNameAlreadyExistsIntegrity(str(e))
+
+    def update(self, author: Author) -> None:
+        with self.get_connection() as connection:
+            with self.get_cursor(connection) as cursor:
+                cursor.execute("""
+                    UPDATE authors SET name = %s
+                    WHERE id = UUID_TO_BIN(%s, true)
+                """, (author.name.value, author.id.value,))
+
+        self.__logger.info(f"Updated author with id: '{author.id.value}'")
 
     def delete(self, author_id: AuthorId) -> None:
         with self.get_connection() as connection:

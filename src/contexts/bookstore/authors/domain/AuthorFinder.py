@@ -16,13 +16,14 @@ class AuthorFinder:
 
     def __call__(self, id: str) -> Author:
         try:
-            author_id = AuthorId(id)
+            try:
+                author_id = AuthorId(id)
+            except AuthorIdNotValidFormat as e:
+                self.__logger.error(e)
+
+                raise AuthorIdNotValid(id)
 
             return self.__repository.find(author_id)
-        except AuthorIdNotValidFormat as e:
-            self.__logger.error(e)
-
-            raise AuthorIdNotValid(id)
         except AuthorDoesNotExistsUnknown as e:
             self.__logger.error(e)
 

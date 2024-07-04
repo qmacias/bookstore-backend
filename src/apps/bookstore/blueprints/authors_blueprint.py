@@ -9,9 +9,9 @@ from src.contexts.bookstore.authors.application.AuthorModifier import AuthorModi
 from src.contexts.bookstore.authors.application.AuthorRemover import AuthorRemover
 from src.contexts.bookstore.authors.application.AuthorSearcher import AuthorSearcher
 from src.contexts.bookstore.authors.application.AuthorsSearcher import AuthorsSearcher
-from src.contexts.bookstore.authors.domain.AuthorAlreadyExists import AuthorAlreadyExists
 from src.contexts.bookstore.authors.domain.AuthorDoesNotExists import AuthorDoesNotExists
 from src.contexts.bookstore.authors.domain.AuthorIdNotValid import AuthorIdNotValid
+from src.contexts.bookstore.authors.domain.AuthorNameAlreadyExists import AuthorNameAlreadyExists
 from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
 
 authors_blueprint = Blueprint('authors_blueprint', __name__)
@@ -28,19 +28,19 @@ def search_all_authors():
     return jsonify(items), 200, {'Location': f'{request.url_rule.rule}'}
 
 
-@authors_blueprint.route('/authors/<author_id>', methods=['PUT'])
-def create_author(author_id):
+@authors_blueprint.route('/authors', methods=['POST'])
+def create_author():
     try:
         data = request.get_json()
 
-        container.get(AuthorCreator).create(author_id, data.get('name'))
+        container.get(AuthorCreator).create(data.get('name'))
 
-        return '', 201, {'Location': f'/authors/{author_id}'}
-    except (AuthorIdNotValid, AuthorNameNotValid, AuthorAlreadyExists) as e:
-        return jsonify({'error': str(e)}), 400, {'Location': f'/authors/{author_id}'}
+        return '', 201, {'Location': f'{request.url_rule.rule}'}
+    except (AuthorIdNotValid, AuthorNameNotValid, AuthorNameAlreadyExists) as e:
+        return jsonify({'error': str(e)}), 400, {'Location': f'{request.url_rule.rule}'}
 
 
-@authors_blueprint.route('/authors/<author_id>', methods=['PATCH'])
+@authors_blueprint.route('/authors/<author_id>', methods=['PUT'])
 def modify_author(author_id):
     try:
         data = request.get_json()

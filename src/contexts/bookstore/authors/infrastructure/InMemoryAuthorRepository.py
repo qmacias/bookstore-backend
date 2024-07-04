@@ -19,6 +19,12 @@ class InMemoryAuthorRepository(AuthorRepository):
     def __init__(self, logger: Logger) -> None:
         self.__logger = logger
 
+    def find(self, author_id: AuthorId) -> Author:
+        try:
+            return deepcopy(self.__authors[author_id.value])
+        except KeyError as e:
+            raise AuthorDoesNotExistsUnknown(f'unknown registry: {str(e)}') from e
+
     def find_all(self) -> Sequence[Author]:
         return list(self.__authors.values())
 
@@ -35,12 +41,6 @@ class InMemoryAuthorRepository(AuthorRepository):
         self.__authors[author.id.value] = deepcopy(author)
 
         self.__logger.info(self.__authors)
-
-    def find(self, author_id: AuthorId) -> Author:
-        try:
-            return deepcopy(self.__authors[author_id.value])
-        except KeyError as e:
-            raise AuthorDoesNotExistsUnknown(f'unknown registry: {str(e)}') from e
 
     def delete(self, author_id: AuthorId) -> None:
         del self.__authors[author_id.value]

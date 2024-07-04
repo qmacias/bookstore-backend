@@ -1,3 +1,4 @@
+from typing import Any
 from types import MappingProxyType
 
 from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
@@ -10,8 +11,8 @@ class Author:
         self._name = name
 
     @staticmethod
-    def create(id: str, name: str) -> 'Author':
-        author = Author(AuthorId(id), AuthorName(name))
+    def create(id: AuthorId, name: AuthorName) -> 'Author':
+        author = Author(id, name)
 
         return author
 
@@ -28,10 +29,11 @@ class Author:
         self._name = AuthorName(value)
 
     def to_primitives(self) -> MappingProxyType:
-        return MappingProxyType({
-            'id': self._id.value,
-            'name': self._name.value,
-        })
+        return MappingProxyType({'id': self._id.value, 'name': self._name.value})
+
+    @staticmethod
+    def from_primitives(plain_data: Any) -> 'Author':
+        return Author(AuthorId(plain_data.get('id')), AuthorName(plain_data.get('name')))
 
     def __hash__(self) -> int:
         return hash((self._id, self._name))

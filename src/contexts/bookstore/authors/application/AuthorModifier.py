@@ -4,6 +4,7 @@ from src.contexts.bookstore.authors.domain.Author import Author
 from src.contexts.bookstore.authors.domain.AuthorFinder import AuthorFinder
 from src.contexts.bookstore.authors.domain.AuthorNameNotValid import AuthorNameNotValid
 from src.contexts.bookstore.authors.domain.AuthorNameNotValidPattern import AuthorNameNotValidPattern
+from src.contexts.bookstore.authors.domain.AuthorNameNotValidType import AuthorNameNotValidType
 from src.contexts.bookstore.authors.domain.AuthorRepository import AuthorRepository
 
 
@@ -15,13 +16,13 @@ class AuthorModifier:
         self.__logger = logger
 
     def modify(self, id: str, name: str) -> None:
-        try:
-            author: Author = self.__finder(id)
+        author: Author = self.__finder(id)
 
+        try:
             author.name = name
 
             self.__repository.update(author)
-        except AuthorNameNotValidPattern as e:
+        except (AuthorNameNotValidType, AuthorNameNotValidPattern) as e:
             self.__logger.error(e)
 
             raise AuthorNameNotValid(name)

@@ -7,6 +7,10 @@ from src.contexts.bookstore.authors.domain.AuthorId import AuthorId
 
 class AuthorRepository(ABC):
     @abstractmethod
+    def find(self, author_id: AuthorId) -> Author:
+        raise NotImplementedError('Must be implemented.')
+
+    @abstractmethod
     def find_all(self) -> Sequence[Author]:
         raise NotImplementedError('Must be implemented.')
 
@@ -16,10 +20,6 @@ class AuthorRepository(ABC):
 
     @abstractmethod
     def update(self, author: Author) -> None:
-        raise NotImplementedError('Must be implemented.')
-
-    @abstractmethod
-    def find(self, author_id: AuthorId) -> Author:
         raise NotImplementedError('Must be implemented.')
 
     @abstractmethod
